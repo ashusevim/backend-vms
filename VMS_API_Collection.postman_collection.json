@@ -1,0 +1,1115 @@
+{
+    "info": {
+        "name": "VMS Backend APIs",
+        "description": "Visitor Management System - Complete API Collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8081/api"
+        },
+        {
+            "key": "token",
+            "value": ""
+        },
+        {
+            "key": "admin_token",
+            "value": ""
+        },
+        {
+            "key": "security_token",
+            "value": ""
+        }
+    ],
+    "item": [
+        {
+            "name": "1. Auth",
+            "item": [
+                {
+                    "name": "Register Admin",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var json = pm.response.json();",
+                                    "if (json.data && json.data.token) {",
+                                    "    pm.collectionVariables.set('admin_token', json.data.token);",
+                                    "    pm.collectionVariables.set('token', json.data.token);",
+                                    "}"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Admin User\",\n  \"email\": \"admin@vms.com\",\n  \"password\": \"admin123\",\n  \"mobile\": \"9876543210\",\n  \"department\": \"IT\",\n  \"designation\": \"System Admin\",\n  \"role\": \"ADMIN\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "register"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Register Associate",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var json = pm.response.json();",
+                                    "if (json.data && json.data.token) {",
+                                    "    pm.collectionVariables.set('token', json.data.token);",
+                                    "}"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"John Associate\",\n  \"email\": \"john@vms.com\",\n  \"password\": \"john123\",\n  \"mobile\": \"9876543211\",\n  \"department\": \"Engineering\",\n  \"designation\": \"Software Engineer\",\n  \"role\": \"ASSOCIATE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "register"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Register Security Guard",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var json = pm.response.json();",
+                                    "if (json.data && json.data.token) {",
+                                    "    pm.collectionVariables.set('security_token', json.data.token);",
+                                    "}"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Guard One\",\n  \"email\": \"guard@vms.com\",\n  \"password\": \"guard123\",\n  \"mobile\": \"9876543212\",\n  \"department\": \"Security\",\n  \"designation\": \"Security Guard\",\n  \"role\": \"SECURITY\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "register"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Login Admin",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var json = pm.response.json();",
+                                    "if (json.data && json.data.token) {",
+                                    "    pm.collectionVariables.set('admin_token', json.data.token);",
+                                    "    pm.collectionVariables.set('token', json.data.token);",
+                                    "}"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"admin@vms.com\",\n  \"password\": \"admin123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Login Associate",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var json = pm.response.json();",
+                                    "if (json.data && json.data.token) {",
+                                    "    pm.collectionVariables.set('token', json.data.token);",
+                                    "}"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@vms.com\",\n  \"password\": \"john123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Login Security Guard",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var json = pm.response.json();",
+                                    "if (json.data && json.data.token) {",
+                                    "    pm.collectionVariables.set('security_token', json.data.token);",
+                                    "}"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"guard@vms.com\",\n  \"password\": \"guard123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "2. Users",
+            "item": [
+                {
+                    "name": "Get All Users (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{admin_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/users",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "users"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get User by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/users/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "users",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Users by Role",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{admin_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/users/role/ASSOCIATE",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "users",
+                                "role",
+                                "ASSOCIATE"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Users by Department",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/users/department/Engineering",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "users",
+                                "department",
+                                "Engineering"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "3. Visitors",
+            "item": [
+                {
+                    "name": "Get All Visitors",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visitors",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visitors"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Visitor by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visitors/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visitors",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Search Visitors",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visitors/search?keyword=Rahul",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visitors",
+                                "search"
+                            ],
+                            "query": [
+                                {
+                                    "key": "keyword",
+                                    "value": "Rahul"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "4. Visit Requests",
+            "item": [
+                {
+                    "name": "Create Visit Request (New Visitor)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"visitorName\": \"Rahul Sharma\",\n  \"visitorMobile\": \"9123456780\",\n  \"visitorEmail\": \"rahul@example.com\",\n  \"visitorCompany\": \"TechCorp\",\n  \"idProofType\": \"AADHAR\",\n  \"idProofNumber\": \"1234-5678-9012\",\n  \"purpose\": \"Business Meeting\",\n  \"fromDate\": \"2026-03-06\",\n  \"toDate\": \"2026-03-06\",\n  \"inTime\": \"10:00\",\n  \"outTime\": \"12:00\",\n  \"associateId\": 2,\n  \"category\": \"BUSINESS\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Visit Request (Existing Visitor)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"visitorId\": 1,\n  \"purpose\": \"Follow-up Meeting\",\n  \"fromDate\": \"2026-03-07\",\n  \"toDate\": \"2026-03-07\",\n  \"inTime\": \"14:00\",\n  \"outTime\": \"16:00\",\n  \"associateId\": 2,\n  \"category\": \"BUSINESS\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Group Visit",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"visitorName\": \"Priya Patel\",\n  \"visitorMobile\": \"9123456781\",\n  \"visitorEmail\": \"priya@example.com\",\n  \"visitorCompany\": \"TechCorp\",\n  \"idProofType\": \"PAN_CARD\",\n  \"idProofNumber\": \"ABCDE1234F\",\n  \"purpose\": \"Team Workshop\",\n  \"fromDate\": \"2026-03-06\",\n  \"toDate\": \"2026-03-06\",\n  \"inTime\": \"10:00\",\n  \"outTime\": \"17:00\",\n  \"associateId\": 2,\n  \"category\": \"BUSINESS\",\n  \"isGroupVisit\": true,\n  \"groupVisitors\": [\n    {\n      \"visitorName\": \"Amit Kumar\",\n      \"visitorMobile\": \"9123456782\",\n      \"visitorEmail\": \"amit@example.com\",\n      \"visitorCompany\": \"TechCorp\",\n      \"idProofType\": \"DRIVING_LICENSE\",\n      \"idProofNumber\": \"DL-1234567890\"\n    }\n  ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Visit Requests",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Visit Request by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get by Status (PENDING)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/status/PENDING",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "status",
+                                "PENDING"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get by Date",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/date?date=2026-03-06",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "date"
+                            ],
+                            "query": [
+                                {
+                                    "key": "date",
+                                    "value": "2026-03-06"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get by Date Range",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/date-range?from=2026-03-01&to=2026-03-31",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "date-range"
+                            ],
+                            "query": [
+                                {
+                                    "key": "from",
+                                    "value": "2026-03-01"
+                                },
+                                {
+                                    "key": "to",
+                                    "value": "2026-03-31"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get by Associate",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/associate/2",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "associate",
+                                "2"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get by Department",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/department/Engineering",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "department",
+                                "Engineering"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Approve Visit Request",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{admin_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"status\": \"APPROVED\",\n  \"remarks\": \"Approved for business meeting\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/1/approve-reject",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "1",
+                                "approve-reject"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Reject Visit Request",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{admin_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"status\": \"REJECTED\",\n  \"remarks\": \"Not authorized for this visit\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/2/approve-reject",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "2",
+                                "approve-reject"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Cancel Visit Request",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/2/cancel",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "2",
+                                "cancel"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get QR Code (Image)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-requests/1/qr-code",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-requests",
+                                "1",
+                                "qr-code"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "5. Visit Logs (Check-in/out)",
+            "item": [
+                {
+                    "name": "Check In (by Visit Request ID)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{security_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"visitRequestId\": 1,\n  \"badgeNumber\": \"V-001\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/visit-logs/check-in",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-logs",
+                                "check-in"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Check In (by QR Token)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{security_token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"qrCodeToken\": \"PASTE_QR_TOKEN_HERE\",\n  \"badgeNumber\": \"V-002\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/visit-logs/check-in",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-logs",
+                                "check-in"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Check Out",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{security_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-logs/check-out/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-logs",
+                                "check-out",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Visit Log by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-logs/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-logs",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Active Visits",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-logs/active",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-logs",
+                                "active"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Visit Logs",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/visit-logs",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "visit-logs"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "6. Dashboard (Admin)",
+            "item": [
+                {
+                    "name": "Get Dashboard Stats",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{admin_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/dashboard/stats",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dashboard",
+                                "stats"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Analytics (Date Range)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{admin_token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/dashboard/analytics?from=2026-03-01&to=2026-03-31",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dashboard",
+                                "analytics"
+                            ],
+                            "query": [
+                                {
+                                    "key": "from",
+                                    "value": "2026-03-01"
+                                },
+                                {
+                                    "key": "to",
+                                    "value": "2026-03-31"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "7. Notifications",
+            "item": [
+                {
+                    "name": "Get My Notifications",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/notifications",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "notifications"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Unread Notifications",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/notifications/unread",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "notifications",
+                                "unread"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Unread Count",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/notifications/unread-count",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "notifications",
+                                "unread-count"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Mark Notification as Read",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/notifications/1/mark-read",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "notifications",
+                                "1",
+                                "mark-read"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
