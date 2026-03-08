@@ -7,6 +7,16 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ * JPA entity representing a notification sent to a user.
+ *
+ * <p>Notifications can be either {@link NotificationType#IN_APP} or
+ * {@link NotificationType#EMAIL}. In-app notifications are displayed within
+ * the application UI and can be marked as read by the recipient.</p>
+ *
+ * @see User
+ * @see NotificationType
+ */
 @Entity
 @Table(name = "notifications")
 @Getter

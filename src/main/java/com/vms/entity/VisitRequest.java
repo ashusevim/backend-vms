@@ -9,6 +9,26 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * JPA entity representing a request for a visitor to access the premises.
+ *
+ * <p>A visit request is created by an associate (or on behalf of one) and goes
+ * through the following lifecycle:</p>
+ * <ol>
+ *   <li>{@link VisitStatus#PENDING} — awaiting admin/associate approval</li>
+ *   <li>{@link VisitStatus#APPROVED} — approved, QR code generated for check-in</li>
+ *   <li>{@link VisitStatus#REJECTED} — declined by the approver</li>
+ *   <li>{@link VisitStatus#CANCELLED} — cancelled before completion</li>
+ *   <li>{@link VisitStatus#COMPLETED} — visitor has checked out or visit expired</li>
+ * </ol>
+ *
+ * <p>Group visits share a common {@code groupId} so they can be approved or
+ * managed together.</p>
+ *
+ * @see Visitor
+ * @see User
+ * @see VisitStatus
+ */
 @Entity
 @Table(name = "visit_requests")
 @Getter

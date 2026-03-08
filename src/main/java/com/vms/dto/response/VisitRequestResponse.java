@@ -10,6 +10,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * Response DTO representing a visit request with all associated details.
+ *
+ * <p>Contains denormalized visitor, associate, and approver information
+ * so the client can render complete visit request details without
+ * additional API calls.</p>
+ */
 @Data
 @Builder
 @NoArgsConstructor

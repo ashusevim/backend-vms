@@ -9,6 +9,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+/**
+ * Data Transfer Object for creating a new visit request.
+ *
+ * <p>Supports two visitor identification modes:</p>
+ * <ul>
+ *   <li>An existing visitor referenced by {@code visitorId}</li>
+ *   <li>A new visitor specified via inline fields ({@code visitorName},
+ *       {@code visitorMobile}, etc.)</li>
+ * </ul>
+ *
+ * <p>For group visits, additional visitors can be supplied in the
+ * {@code additionalVisitors} list. All members of a group share the same
+ * group ID and are approved or rejected together.</p>
+ *
+ * @see com.vms.service.VisitRequestService#createVisitRequest(CreateVisitRequestDTO)
+ */
 @Data
 public class CreateVisitRequestDTO {
 
@@ -44,6 +60,13 @@ public class CreateVisitRequestDTO {
     // For group visits: list of additional visitors
     private List<VisitorInfo> additionalVisitors;
 
+    /**
+     * Nested DTO representing an additional visitor in a group visit.
+     *
+     * <p>Used when multiple visitors are part of the same visit request.
+     * Each visitor info entry creates a separate {@link com.vms.entity.Visitor}
+     * and {@link com.vms.entity.VisitRequest} linked by a shared group ID.</p>
+     */
     @Data
     public static class VisitorInfo {
         private String name;

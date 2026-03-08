@@ -30,6 +30,15 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of {@link VisitRequestService} managing the full visit request lifecycle.
+ *
+ * <p>Handles creation of individual and group visit requests, approval/rejection
+ * workflows with QR code generation, cancellation, and QR code image rendering.
+ * Notifications and audit logs are generated at each lifecycle stage.</p>
+ *
+ * @see VisitRequestService
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -111,6 +120,15 @@ public class VisitRequestServiceImpl implements VisitRequestService {
         return mapToResponse(visitRequest);
     }
 
+    /**
+     * Builds a {@link VisitRequest} entity from the creation DTO, visitor, associate, and group ID.
+     *
+     * @param request   the visit request creation DTO
+     * @param visitor   the visitor entity
+     * @param associate the associate (host) user entity
+     * @param groupId   the group ID for group visits (may be {@code null})
+     * @return a new {@link VisitRequest} entity with PENDING status
+     */
     private VisitRequest buildVisitRequest(CreateVisitRequestDTO request, Visitor visitor,
             User associate, String groupId) {
         return VisitRequest.builder()
@@ -331,6 +349,12 @@ public class VisitRequestServiceImpl implements VisitRequestService {
         }
     }
 
+    /**
+     * Maps a {@link VisitRequest} entity to a {@link VisitRequestResponse} DTO.
+     *
+     * @param vr the visit request entity
+     * @return the mapped response DTO
+     */
     private VisitRequestResponse mapToResponse(VisitRequest vr) {
         return VisitRequestResponse.builder()
                 .id(vr.getId())

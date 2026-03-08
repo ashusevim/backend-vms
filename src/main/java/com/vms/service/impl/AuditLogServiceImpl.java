@@ -6,6 +6,12 @@ import com.vms.service.AuditLogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of {@link AuditLogService} that persists audit log entries to the database.
+ *
+ * @see AuditLogService
+ * @see AuditLog
+ */
 @Service
 @RequiredArgsConstructor
 public class AuditLogServiceImpl implements AuditLogService {

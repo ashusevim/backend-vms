@@ -6,6 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Response DTO representing a user's profile information.
+ *
+ * <p>Contains non-sensitive user details suitable for API responses.
+ * The password field is intentionally excluded.</p>
+ */
 @Data
 @Builder
 @NoArgsConstructor

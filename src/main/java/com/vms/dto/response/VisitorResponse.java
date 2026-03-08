@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * Response DTO representing a visitor's profile information.
+ *
+ * <p>Includes personal details, identification information, and the path
+ * to the visitor's uploaded photo (if available).</p>
+ */
 @Data
 @Builder
 @NoArgsConstructor

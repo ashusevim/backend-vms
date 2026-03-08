@@ -7,6 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * Response DTO representing a visit log entry (check-in/check-out record).
+ *
+ * <p>Includes denormalized visitor, associate, and security guard names
+ * to avoid additional lookups on the client side.</p>
+ */
 @Data
 @Builder
 @NoArgsConstructor

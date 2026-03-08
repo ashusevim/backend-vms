@@ -6,6 +6,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+/**
+ * Data Transfer Object for new user registration requests.
+ *
+ * <p>Captures all required fields to create a new user account in the system,
+ * including personal details and the assigned {@link Role}.</p>
+ *
+ * @see com.vms.controller.AuthController#register(RegisterRequest)
+ */
 @Data
 public class RegisterRequest {
 

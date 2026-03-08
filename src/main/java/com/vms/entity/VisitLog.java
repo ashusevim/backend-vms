@@ -5,6 +5,18 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * JPA entity representing a physical check-in/check-out record for a visit.
+ *
+ * <p>A visit log is created when a security guard checks in a visitor with
+ * an approved {@link VisitRequest}. The log tracks the check-in time,
+ * check-out time, badge number, and the security guard who processed the visit.</p>
+ *
+ * <p>A {@code null} {@code checkOutTime} indicates the visitor is still on premises.</p>
+ *
+ * @see VisitRequest
+ * @see User
+ */
 @Entity
 @Table(name = "visit_logs")
 @Getter

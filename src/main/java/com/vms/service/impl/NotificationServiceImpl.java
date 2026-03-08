@@ -21,6 +21,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Implementation of {@link NotificationService} providing in-app and email notifications.
+ *
+ * <p>In-app notifications are persisted to the database. Email notifications are sent
+ * via Spring's {@link JavaMailSender}; SMTP failures are logged but do not prevent
+ * the operation from succeeding.</p>
+ *
+ * @see NotificationService
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -148,6 +157,19 @@ public class NotificationServiceImpl implements NotificationService {
         }
     }
 
+    /**
+     * Builds the HTML content for the digital access card email.
+     *
+     * @param visitorName   the visitor's display name
+     * @param visitorEmail  the visitor's email address
+     * @param qrToken       the QR code access token
+     * @param purpose       the purpose of the visit
+     * @param fromDate      the visit start date
+     * @param toDate        the visit end date
+     * @param associateName the host associate's name
+     * @param hasPhoto      whether the visitor has an uploaded photo
+     * @return the complete HTML string for the email body
+     */
     private String buildAccessCardHtml(String visitorName, String visitorEmail, String qrToken,
             String purpose, String fromDate, String toDate, String associateName, boolean hasPhoto) {
         String photoSection = hasPhoto

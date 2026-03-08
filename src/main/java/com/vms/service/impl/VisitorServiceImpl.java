@@ -22,6 +22,14 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of {@link VisitorService} providing visitor CRUD and photo management.
+ *
+ * <p>Supports creating and updating visitor profiles, keyword-based search,
+ * and uploading/retrieving visitor photos stored on the local filesystem.</p>
+ *
+ * @see VisitorService
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -142,11 +150,23 @@ public class VisitorServiceImpl implements VisitorService {
         }
     }
 
+    /**
+     * Extracts the file extension from a filename.
+     *
+     * @param filename the original filename
+     * @return the file extension including the dot (e.g., ".jpg"), defaults to ".jpg"
+     */
     private String getFileExtension(String filename) {
         if (filename == null || !filename.contains(".")) return ".jpg";
         return filename.substring(filename.lastIndexOf('.'));
     }
 
+    /**
+     * Maps a {@link Visitor} entity to a {@link VisitorResponse} DTO.
+     *
+     * @param visitor the visitor entity
+     * @return the mapped response DTO
+     */
     private VisitorResponse mapToResponse(Visitor visitor) {
         return VisitorResponse.builder()
                 .id(visitor.getId())

@@ -16,6 +16,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of {@link AuthService} providing authentication and user registration.
+ *
+ * <p>Uses Spring Security's {@link AuthenticationManager} for credential validation
+ * and {@link JwtUtil} for JWT token generation. All authentication events are
+ * recorded via the {@link AuditLogService}.</p>
+ *
+ * @see AuthService
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {

@@ -6,6 +6,16 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ * JPA entity representing an audit trail entry for tracking user actions.
+ *
+ * <p>Every significant action in the system (login, registration, visit request
+ * creation, approval, check-in, check-out, etc.) is recorded as an audit log
+ * entry for compliance and traceability purposes.</p>
+ *
+ * <p>Each entry captures the acting user, the action performed, the entity type
+ * and ID that was affected, and free-text details describing the event.</p>
+ */
 @Entity
 @Table(name = "audit_logs")
 @Getter

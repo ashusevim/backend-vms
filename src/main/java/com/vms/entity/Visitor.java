@@ -7,6 +7,19 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ * JPA entity representing an external visitor to the organization.
+ *
+ * <p>Stores personal and identification details of individuals who visit
+ * the premises. A visitor can be linked to one or more {@link VisitRequest}
+ * records over time.</p>
+ *
+ * <p>An optional photo may be uploaded and stored on the filesystem;
+ * the {@code photoPath} field holds the file system path to the image.</p>
+ *
+ * @see VisitRequest
+ * @see IdProofType
+ */
 @Entity
 @Table(name = "visitors")
 @Getter

@@ -17,6 +17,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of {@link DashboardService} providing aggregated dashboard statistics.
+ *
+ * <p>Queries visit request and visit log repositories to compute metrics such as
+ * approval counts, daily trends, department breakdowns, peak visiting hours,
+ * and most-visited associates.</p>
+ *
+ * @see DashboardService
+ */
 @Service
 @RequiredArgsConstructor
 public class DashboardServiceImpl implements DashboardService {
@@ -71,6 +80,11 @@ public class DashboardServiceImpl implements DashboardService {
                 .build();
     }
 
+    /**
+     * Retrieves the department-wise breakdown of approved visit requests.
+     *
+     * @return a map of department name to approved visit count
+     */
     private Map<String, Long> getDepartmentBreakdown() {
         List<Object[]> results = visitRequestRepository.countByDepartment();
         Map<String, Long> breakdown = new LinkedHashMap<>();
@@ -82,16 +96,35 @@ public class DashboardServiceImpl implements DashboardService {
         return breakdown;
     }
 
+    /**
+     * Retrieves peak visiting hours for today.
+     *
+     * @return a map of hour (0-23) to visit count
+     */
     private Map<Integer, Long> getPeakHours() {
         LocalDateTime start = LocalDate.now().atStartOfDay();
         LocalDateTime end = LocalDate.now().atTime(LocalTime.MAX);
         return getPeakHoursInternal(start, end);
     }
 
+    /**
+     * Retrieves peak visiting hours for a custom date range.
+     *
+     * @param from the start date
+     * @param to   the end date
+     * @return a map of hour (0-23) to visit count
+     */
     private Map<Integer, Long> getPeakHoursForRange(LocalDate from, LocalDate to) {
         return getPeakHoursInternal(from.atStartOfDay(), to.atTime(LocalTime.MAX));
     }
 
+    /**
+     * Internal method to query and map peak visiting hours within a datetime range.
+     *
+     * @param start the start datetime
+     * @param end   the end datetime
+     * @return a map of hour (0-23) to visit count
+     */
     private Map<Integer, Long> getPeakHoursInternal(LocalDateTime start, LocalDateTime end) {
         List<Object[]> results = visitLogRepository.findPeakVisitingHours(start, end);
         Map<Integer, Long> peakHours = new LinkedHashMap<>();
@@ -103,6 +136,11 @@ public class DashboardServiceImpl implements DashboardService {
         return peakHours;
     }
 
+    /**
+     * Retrieves the top 10 most-visited associates by approved visit count.
+     *
+     * @return a list of associate visit count DTOs
+     */
     private List<DashboardResponse.AssociateVisitCount> getMostVisitedAssociates() {
         List<Object[]> results = visitRequestRepository.findMostVisitedAssociates();
         return results.stream()
@@ -114,6 +152,17 @@ public class DashboardServiceImpl implements DashboardService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Computes daily visitor counts for the given date range.
+     *
+     * <p>Initializes all days in the range with zero, then fills in actual counts.
+     * Days are keyed by their 3-letter abbreviation (e.g., "MON", "TUE") for single-week
+     * ranges, or by ISO date string for multi-week ranges.</p>
+     *
+     * @param from the start date
+     * @param to   the end date
+     * @return a map of day label to visitor count
+     */
     private Map<String, Long> getDailyCountsForWeek(LocalDate from, LocalDate to) {
         List<Object[]> results = visitRequestRepository.countPerDay(from, to);
         Map<String, Long> dailyCounts = new LinkedHashMap<>();

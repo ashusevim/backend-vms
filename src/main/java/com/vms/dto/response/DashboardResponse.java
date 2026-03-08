@@ -8,6 +8,15 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Response DTO containing aggregated dashboard and analytics data.
+ *
+ * <p>Used by the admin dashboard to display key metrics such as approval counts,
+ * daily visitor trends, department-wise breakdowns, peak visiting hours, and
+ * the most-visited associates.</p>
+ *
+ * @see com.vms.service.DashboardService
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -38,6 +47,11 @@ public class DashboardResponse {
     // Most visited associates: [{name, count}]
     private List<AssociateVisitCount> mostVisitedAssociates;
 
+    /**
+     * Nested DTO representing a single associate and their total visit count.
+     *
+     * <p>Used in the "Most Visited Associates" leaderboard section of the dashboard.</p>
+     */
     @Data
     @Builder
     @NoArgsConstructor

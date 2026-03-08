@@ -12,6 +12,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of {@link UserService} providing read-only user management operations.
+ *
+ * <p>Retrieves user data from the repository and maps entities to
+ * {@link UserResponse} DTOs for API consumption.</p>
+ *
+ * @see UserService
+ */
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -46,6 +54,12 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Maps a {@link User} entity to a {@link UserResponse} DTO.
+     *
+     * @param user the user entity
+     * @return the mapped response DTO
+     */
     private UserResponse mapToResponse(User user) {
         return UserResponse.builder()
                 .id(user.getId())

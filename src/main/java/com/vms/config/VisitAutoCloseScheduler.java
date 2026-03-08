@@ -16,8 +16,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Scheduled task to auto-close visits where visitors forgot to check out.
- * Runs daily at 9 PM (after typical office hours).
+ * Scheduled task that auto-closes overdue visits where visitors forgot to check out.
+ *
+ * <p>Runs daily at 9:00 PM (after typical office hours) and performs two actions:</p>
+ * <ol>
+ *   <li>Sets check-out time and marks as {@link VisitStatus#COMPLETED} for any
+ *       visit logs that still have a {@code null} check-out time and whose
+ *       visit request end date has passed.</li>
+ *   <li>Marks approved visit requests that were never checked in and whose
+ *       end date has passed as {@link VisitStatus#COMPLETED}.</li>
+ * </ol>
+ *
+ * @see VisitLogRepository#findByCheckOutTimeIsNull()
+ * @see VisitRequestRepository#findExpiredApprovedRequests(LocalDate)
  */
 @Component
 @RequiredArgsConstructor
@@ -27,6 +38,11 @@ public class VisitAutoCloseScheduler {
     private final VisitLogRepository visitLogRepository;
     private final VisitRequestRepository visitRequestRepository;
 
+    /**
+     * Closes expired visits and marks stale approved requests as completed.
+     *
+     * <p>Runs transactionally so that all updates succeed or fail together.</p>
+     */
     @Scheduled(cron = "0 0 21 * * *") // Every day at 9 PM
     @Transactional
     public void autoCloseExpiredVisits() {

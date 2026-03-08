@@ -23,6 +23,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of {@link VisitLogService} managing visitor check-in/check-out operations.
+ *
+ * <p>Supports check-in via QR code token or visit request ID. On check-in, the
+ * associate is notified; on check-out, the visit request status is set to COMPLETED.
+ * All actions are recorded in the audit log.</p>
+ *
+ * @see VisitLogService
+ */
 @Service
 @RequiredArgsConstructor
 public class VisitLogServiceImpl implements VisitLogService {
@@ -131,6 +140,12 @@ public class VisitLogServiceImpl implements VisitLogService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Maps a {@link VisitLog} entity to a {@link VisitLogResponse} DTO.
+     *
+     * @param vl the visit log entity
+     * @return the mapped response DTO
+     */
     private VisitLogResponse mapToResponse(VisitLog vl) {
         return VisitLogResponse.builder()
                 .id(vl.getId())

@@ -4,6 +4,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+/**
+ * Data Transfer Object for user login requests.
+ *
+ * <p>Contains the credentials (email and password) required to authenticate
+ * a user and obtain a JWT token.</p>
+ *
+ * @see com.vms.controller.AuthController#login(LoginRequest)
+ */
 @Data
 public class LoginRequest {
 

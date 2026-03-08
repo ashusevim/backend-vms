@@ -23,6 +23,16 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Spring Security configuration for the VMS application.
+ *
+ * <p>Configures a stateless, JWT-based security model with CORS support.
+ * CSRF protection is disabled because the API is consumed by a SPA that
+ * authenticates via Bearer tokens. Method-level security is enabled for
+ * role-based endpoint restrictions.</p>
+ *
+ * @see JwtAuthenticationFilter
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -31,6 +41,14 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    /**
+     * Builds the {@link SecurityFilterChain} with JWT authentication, CORS,
+     * stateless sessions, and role-based access rules.
+     *
+     * @param http the {@link HttpSecurity} builder
+     * @return the configured filter chain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -58,17 +76,37 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Exposes the {@link AuthenticationManager} as a Spring bean.
+     *
+     * @param authenticationConfiguration the auto-configured authentication settings
+     * @return the authentication manager
+     * @throws Exception if retrieval fails
+     */
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    /**
+     * Provides a {@link BCryptPasswordEncoder} for secure password hashing.
+     *
+     * @return the password encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Configures CORS to allow cross-origin requests from any origin.
+     *
+     * <p>Permits {@code GET}, {@code POST}, {@code PUT}, {@code DELETE}, and
+     * {@code OPTIONS} methods, and exposes the {@code Authorization} header.</p>
+     *
+     * @return the CORS configuration source
+     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

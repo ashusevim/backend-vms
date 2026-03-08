@@ -8,6 +8,21 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ * JPA entity representing a system user in the Visitor Management System.
+ *
+ * <p>Users can have one of three roles: {@link Role#ADMIN}, {@link Role#ASSOCIATE},
+ * or {@link Role#SECURITY}. Each role grants different levels of access and
+ * functionality within the system.</p>
+ *
+ * <ul>
+ *   <li><strong>ADMIN</strong> — manages visit requests, users, and views dashboards</li>
+ *   <li><strong>ASSOCIATE</strong> — creates visit requests and receives visitor notifications</li>
+ *   <li><strong>SECURITY</strong> — handles visitor check-in and check-out at the gate</li>
+ * </ul>
+ *
+ * @see Role
+ */
 @Entity
 @Table(name = "users")
 @Getter
