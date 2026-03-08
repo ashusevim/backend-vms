@@ -16,7 +16,7 @@ import { AuthService } from '../../../core/services/auth.service';
               V
             </div>
             <span class="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-primary-500">
-              VMS <span class="text-slate-900 font-light italic">Intellect</span>
+              VMS <span class="text-slate-900 font-light italic"></span>
             </span>
           </a>
           

@@ -73,34 +73,8 @@ import { DateTime } from 'luxon';
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <!-- Main Chart -->
-          <div class="lg:col-span-2 bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
-            <h3 class="text-xl font-bold mb-6">Visiting Trends (Weekly)</h3>
-            <div class="h-[300px]">
-              <canvas baseChart
-                [data]="lineChartData"
-                [options]="lineChartOptions"
-                [type]="'line'">
-              </canvas>
-            </div>
-          </div>
-
-          <!-- Pie Chart -->
-          <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
-            <h3 class="text-xl font-bold mb-6">Department Breakdown</h3>
-            <div class="h-[300px] flex items-center justify-center">
-              <canvas baseChart
-                [data]="pieChartData"
-                [options]="pieChartOptions"
-                [type]="'doughnut'">
-              </canvas>
-            </div>
-          </div>
-        </div>
-
         <!-- Calendar & Daily Stats -->
-        <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
             <div class="flex justify-between items-center mb-6">
               <h3 class="text-xl font-bold">Interactive Calendar</h3>
@@ -185,6 +159,18 @@ import { DateTime } from 'luxon';
              </div>
           </div>
         </div>
+
+        <!-- Main Chart -->
+        <div class="mt-8 bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100">
+          <h3 class="text-xl font-bold mb-6">Visiting Trends (Weekly)</h3>
+          <div class="h-[300px]">
+            <canvas baseChart
+              [data]="lineChartData"
+              [options]="lineChartOptions"
+              [type]="'line'">
+            </canvas>
+          </div>
+        </div>
       </main>
     </div>
   `,
@@ -218,7 +204,6 @@ export class AdminDashboardComponent implements OnInit {
   loadStats() {
     this.dashboardService.getStats().subscribe(res => {
       this.stats.set(res.data);
-      this.updateCharts(res.data);
     });
   }
 
@@ -284,27 +269,6 @@ export class AdminDashboardComponent implements OnInit {
       x: { grid: { display: false } }
     }
   };
-
-  public pieChartData: ChartData<'doughnut'> = {
-    labels: ['IT', 'HR', 'Finance', 'Engineering'],
-    datasets: [{
-      data: [35, 15, 20, 30],
-      backgroundColor: ['#0ea5e9', '#6366f1', '#f59e0b', '#ec4899']
-    }]
-  };
-
-  public pieChartOptions: ChartConfiguration['options'] = {
-     responsive: true,
-     maintainAspectRatio: false,
-     plugins: { legend: { position: 'bottom' } }
-  };
-
-  updateCharts(data: DashboardResponse) {
-    if (data.visitorsByDepartment) {
-      this.pieChartData.labels = Object.keys(data.visitorsByDepartment);
-      this.pieChartData.datasets[0].data = Object.values(data.visitorsByDepartment);
-    }
-  }
 
   // Calendar Logic
   generateCalendar() {

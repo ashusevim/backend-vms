@@ -321,8 +321,8 @@ export class AdminVisitRequestsComponent implements OnInit {
   filteredRequests = computed(() => {
     const filter = this.activeFilter();
     const all = this.allRequests();
-    if (filter === 'ALL') return all;
-    return all.filter(r => r.status === filter);
+    const filtered = filter === 'ALL' ? all : all.filter(r => r.status === filter);
+    return [...filtered].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   });
 
   constructor(private visitRequestService: VisitRequestService) {}
