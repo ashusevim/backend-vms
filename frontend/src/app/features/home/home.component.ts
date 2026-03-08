@@ -41,13 +41,13 @@ import { Role } from '../../core/models/vms.models';
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div class="text-center" @fadeInUp>
             <h1 class="text-5xl lg:text-7xl font-black text-slate-900 mb-6 leading-tight">
-              Next-Gen <br/>
+              NxT-LvL <br/>
               <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-cyan-500">
                 Visitor Management
               </span>
             </h1>
             <p class="text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Seamless. Secure. Smart. Elevate your workplace safety and guest experience with VMS Intellect's AI-driven visitor tracking platform.
+              Seamless. Secure. Smart. Elevate your workplace safety and guest experience with VMS Intellect's visitor tracking platform.
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">

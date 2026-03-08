@@ -62,9 +62,7 @@ import { Role } from '../../../core/models/vms.models';
             <label class="block text-sm font-bold text-slate-700 mb-2">Role</label>
             <select formControlName="role"
               class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-100 transition-all appearance-none bg-white">
-              <option value="ADMIN">Admin</option>
-              <option value="ASSOCIATE">Associate</option>
-              <option value="SECURITY">Security Guard</option>
+              <option *ngFor="let r of availableRoles" [value]="r.value">{{ r.label }}</option>
             </select>
           </div>
 
@@ -97,6 +95,13 @@ export class RegisterComponent {
   registerForm: FormGroup;
   isLoading = false;
   error = '';
+  availableRoles: { value: string; label: string }[] = [];
+
+  private static readonly allRoles = [
+    { value: 'ADMIN', label: 'Admin' },
+    { value: 'ASSOCIATE', label: 'Associate' },
+    { value: 'SECURITY', label: 'Security Guard' }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -105,6 +110,9 @@ export class RegisterComponent {
     private route: ActivatedRoute
   ) {
     const defaultRole = this.route.snapshot.queryParamMap.get('role') || 'ASSOCIATE';
+
+    const match = RegisterComponent.allRoles.find(r => r.value === defaultRole);
+    this.availableRoles = match ? [match] : RegisterComponent.allRoles;
     
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
